@@ -21,12 +21,27 @@ import static io.qdrant.client.QueryFactory.nearestMultiVector;
 import static io.qdrant.client.WithPayloadSelectorFactory.enable;
 
 public class JinaColbertV2Search {
-
     // TODO you can get your free Jina AI API Key from : https://jina.ai/embeddings/
     private static final String jinaAIKey = "<insert your jina ai_key here>";
+
+    /**
+     * Performs a semantic search on FAQ documents using Jina ColBERT v2 embeddings and Qdrant.
+     *
+     * @param searchQuery The search query string.
+     * @param client The QdrantClient instance for querying the vector database.
+     * @param topK The number of top results to return.
+     * @param collectionName The name of the Qdrant collection to search in.
+     * @return An Optional containing a List of FAQSearchResult objects, or an empty Optional if no results are found.
+     * @throws IOException If there's an error in I/O operations.
+     * @throws ExecutionException If the computation threw an exception.
+     * @throws InterruptedException If the current thread was interrupted while waiting.
+     */
     public static Optional<List<FAQSearchResult>> semanticJinaColbertV2FAQSearch(String searchQuery, QdrantClient client, int topK, String  collectionName) throws IOException, ExecutionException, InterruptedException {
 
+        //create embedding for the query using Jina AI API as per this document: https://jina.ai/news/jina-colbert-v2-multilingual-late-interaction-retriever-for-embedding-and-reranking/
         var queryEmbedding = createJinaColbertV2Embedding(searchQuery, true);
+
+        //query indexed FAQ using Qdrant Java Client
         List<Points.ScoredPoint> result = client.queryAsync(Points.QueryPoints.newBuilder()
                 .setCollectionName(collectionName)
                 .setLimit(topK)
@@ -45,6 +60,14 @@ public class JinaColbertV2Search {
         return Optional.of(searchResult);
     }
 
+    /**
+     * Creates Jina ColBERT v2 embeddings for the given text.
+     *
+     * @param text The input text to create embeddings for.
+     * @param isQuery A boolean indicating whether the text is a query (true) or a document (false).
+     * @return A List of Lists of Float values representing the embeddings.
+     * @throws IOException If there's an error in I/O operations.
+     */
     public static List<List<Float>> createJinaColbertV2Embedding(String text, boolean isQuery) throws IOException {
         OkHttpClient client = new OkHttpClient.Builder()
                 .connectTimeout(60, TimeUnit.SECONDS)
@@ -52,6 +75,7 @@ public class JinaColbertV2Search {
                 .readTimeout(60, TimeUnit.SECONDS)
                 .build();
 
+        //create jinacolbertv2 embedding API HTTP request as per this documentation : https://jina.ai/news/jina-colbert-v2-multilingual-late-interaction-retriever-for-embedding-and-reranking/
         final Request request = createJinaColbertV2EmbeddingRequest(text, isQuery);
 
         String responseBody;
@@ -78,6 +102,13 @@ public class JinaColbertV2Search {
                 .toList();
     }
 
+    /**
+     * Creates an HTTP request for the Jina ColBERT v2 embedding API.
+     *
+     * @param text The input text to create embeddings for.
+     * @param isQuery A boolean indicating whether the text is a query (true) or a document (false).
+     * @return A Request object for the Jina ColBERT v2 embedding API.
+     */
     private static Request createJinaColbertV2EmbeddingRequest(String text, boolean isQuery) {
         final String JINA_API_EMBEDDING_URL = "https://api.jina.ai/v1/multi-vector";
 

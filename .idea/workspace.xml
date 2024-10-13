@@ -4,9 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b33de537-2823-42e8-b387-dd304b7cc6d9" name="Changes" comment="add license file">
-      <change afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+    <list default="true" id="b33de537-2823-42e8-b387-dd304b7cc6d9" name="Changes" comment="add README.md file">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/athingforcode/llm4j/app/SearchUsingJinaColbertV2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/athingforcode/llm4j/app/SearchUsingJinaColbertV2.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/athingforcode/llm4j/service/JinaColbertV2Search.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/athingforcode/llm4j/service/JinaColbertV2Search.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/athingforcode/llm4j/service/QdrantOperation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/athingforcode/llm4j/service/QdrantOperation.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -103,12 +105,21 @@
       <option name="project" value="LOCAL" />
       <updated>1728814157782</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="add README.md file">
+      <option name="closed" value="true" />
+      <created>1728815492183</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1728815492183</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Initial Commit" />
     <MESSAGE value="add license file" />
-    <option name="LAST_COMMIT_MESSAGE" value="add license file" />
+    <MESSAGE value="add README.md file" />
+    <option name="LAST_COMMIT_MESSAGE" value="add README.md file" />
   </component>
 </project>

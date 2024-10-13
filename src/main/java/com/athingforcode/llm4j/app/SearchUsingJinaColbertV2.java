@@ -13,7 +13,11 @@ public class SearchUsingJinaColbertV2 {
     public static void main(String[] args) throws Exception {
         final var client = new QdrantClient(QdrantGrpcClient.newBuilder("localhost", 6334, false).build());
         final String collectionName = "jinacolbertv2faqcollection";
+
+        //This demonstrate querying documents using Jina Colbert V2 Embedding as documented here :
+        //https://jina.ai/news/jina-colbert-v2-multilingual-late-interaction-retriever-for-embedding-and-reranking/
         searchJinaColbertV2AppStart(client,collectionName);
+
         /* Execute this line if you would like to create new empty Qdrant multivector collection
         QdrantOperation.createQDrantCollectionMultiVectorEmbeddingUsingClient(client,"jinacolbertv2faqcollection");
         */
@@ -34,6 +38,7 @@ public class SearchUsingJinaColbertV2 {
                 break;
             }
             var startTime = System.currentTimeMillis();
+            //search indexed FAQ stored in Qdrant
             var searchResult = JinaColbertV2Search.semanticJinaColbertV2FAQSearch(searchQuery,client,5,collectionName);
             Util.printElapsedTime(startTime, "search faq");
             searchResult.ifPresentOrElse(list -> list.forEach(System.out::println),

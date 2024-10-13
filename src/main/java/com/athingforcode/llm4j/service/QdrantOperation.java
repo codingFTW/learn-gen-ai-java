@@ -22,6 +22,15 @@ import static io.qdrant.client.PointIdFactory.id;
 public class QdrantOperation {
     private static final String jakartaZoneId = "GMT+7";
 
+
+    /**
+     * Creates a QDrant collection with multi-vector embedding configuration using the provided QdrantClient.
+     *
+     * @param client The QdrantClient instance to use for creating the collection.
+     * @param collectionName The name of the collection to be created.
+     * @throws ExecutionException If the execution of the asynchronous operation fails.
+     * @throws InterruptedException If the current thread is interrupted while waiting for the asynchronous operation to complete.
+     */
     public static void createQDrantCollectionMultiVectorEmbeddingUsingClient(QdrantClient client, String collectionName) throws ExecutionException, InterruptedException {
         client.createCollectionAsync(collectionName,
                 Collections.VectorParams.newBuilder()
@@ -33,8 +42,18 @@ public class QdrantOperation {
                         .build()).get();
     }
 
+    /**
+     * Inserts FAQ data into a QDrant collection with multi-vector embedding.
+     *
+     * @param client The QdrantClient instance to use for inserting data.
+     * @param collectionName The name of the collection to insert data into.
+     * @param originFilePath The file path of the origin data in JSONL format.
+     * @throws ExecutionException If the execution of the asynchronous operation fails.
+     * @throws InterruptedException If the current thread is interrupted while waiting for the asynchronous operation to complete.
+     * @throws IOException If an I/O error occurs while reading the origin file.
+     */
     public static void insertFAQToQdrantMultiVectorEmbeddingCollection(QdrantClient client, String collectionName, String originFilePath) throws ExecutionException, InterruptedException, IOException {
-        var faqs = createJinaColbertV2FAQJsonlFile(originFilePath).orElse(java.util.Collections.emptyList());
+        var faqs = readFAQJSONlFile(originFilePath).orElse(java.util.Collections.emptyList());
         var idCounter = new AtomicLong(1);
         var points = faqs.stream()
                 .map(faq -> Points.PointStruct.newBuilder()
@@ -52,7 +71,14 @@ public class QdrantOperation {
             .get();
     }
 
-    private static Optional<List<FAQColbertEmbedding>> createJinaColbertV2FAQJsonlFile(String originFilePath) throws IOException {
+    /**
+     * Creates a list of FAQColbertEmbedding objects from a JSONL file.
+     *
+     * @param originFilePath The file path of the origin data in JSONL format.
+     * @return An Optional containing a List of FAQColbertEmbedding objects if successful, or an empty Optional if the file is empty or an error occurs.
+     * @throws IOException If an I/O error occurs while reading the origin file.
+     */
+    private static Optional<List<FAQColbertEmbedding>> readFAQJSONlFile(String originFilePath) throws IOException {
         List<FAQColbertEmbedding> faqs = null;
         try (BufferedReader br = new BufferedReader(new FileReader(originFilePath))) {
             String line;
@@ -86,11 +112,24 @@ public class QdrantOperation {
         return Optional.ofNullable(faqs);
     }
 
+    /**
+     * Converts a ZonedDateTime object to a formatted string.
+     *
+     * @param dateTime The ZonedDateTime object to be converted.
+     * @return A string representation of the date and time in the format "yyyy-MM-dd HH:mm:ss z".
+     */
     private static String stringFromDateTime(ZonedDateTime dateTime) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss z");
         return dateTime.format(formatter);
     }
 
+    /**
+     * Converts a Unix timestamp to a ZonedDateTime object.
+     *
+     * @param unixTimestamp The Unix timestamp to be converted.
+     * @param timezone The timezone ID string for the resulting ZonedDateTime.
+     * @return A ZonedDateTime object representing the given Unix timestamp in the specified timezone.
+     */
     private static ZonedDateTime unixTimeStamptoZonedDateTime(long unixTimestamp, String timezone) {
         return Instant.ofEpochSecond(unixTimestamp).atZone(ZoneId.of(timezone));
     }
