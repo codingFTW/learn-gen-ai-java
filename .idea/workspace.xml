@@ -4,22 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b33de537-2823-42e8-b387-dd304b7cc6d9" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/faq_prod.jsonl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/athingforcode/llm4j/app/SearchUsingJinaColbertV2.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/athingforcode/llm4j/embedding/domain/FAQColbertEmbedding.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/athingforcode/llm4j/searchresult/domain/FAQSearchResult.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/athingforcode/llm4j/service/JinaColbertV2Search.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/athingforcode/llm4j/service/QdrantOperation.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/athingforcode/llm4j/service/Util.java" afterDir="false" />
-    </list>
+    <list default="true" id="b33de537-2823-42e8-b387-dd304b7cc6d9" name="Changes" comment="Initial Commit" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -87,6 +72,19 @@
       <option name="presentableId" value="Default" />
       <updated>1728794857365</updated>
     </task>
+    <task id="LOCAL-00001" summary="Initial Commit">
+      <option name="closed" value="true" />
+      <created>1728814002563</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1728814002563</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Initial Commit" />
+    <option name="LAST_COMMIT_MESSAGE" value="Initial Commit" />
   </component>
 </project>
